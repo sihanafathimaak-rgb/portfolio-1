@@ -1,7 +1,4 @@
-/* ===================================================
-   1. AMBIENT CURSOR GLOW TRACKER
-   Smooth trailing radial glow following the mouse
-=================================================== */
+/* Ambient Cursor Glow Tracker */
 const cursorGlow = document.getElementById('cursor-glow');
 let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
@@ -14,7 +11,6 @@ window.addEventListener('mousemove', (e) => {
 });
 
 function renderCursor() {
-  // Smooth linear interpolation (lerp)
   currentX += (mouseX - currentX) * 0.1;
   currentY += (mouseY - currentY) * 0.1;
   if (cursorGlow) {
@@ -25,10 +21,7 @@ function renderCursor() {
 }
 renderCursor();
 
-/* ===================================================
-   2. INTERACTIVE BACKGROUND PARTICLE CANVAS
-   Nodes with connecting lines and soft purple glow
-=================================================== */
+/* Interactive Particle Canvas */
 const canvas = document.getElementById('particle-canvas');
 if (canvas) {
   const ctx = canvas.getContext('2d');
@@ -81,7 +74,6 @@ if (canvas) {
       particles[i].update();
       particles[i].draw();
 
-      // Connect nearby points with glowing lines
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
@@ -101,15 +93,12 @@ if (canvas) {
   animateParticles();
 }
 
-/* ===================================================
-   3. NAVIGATION & SCROLL TRACKER
-=================================================== */
+/* Header & Active Link Tracker */
 const header = document.getElementById('mainHeader');
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('.nav-links a');
 
 window.addEventListener('scroll', () => {
-  // Sticky header background transition
   if (header) {
     if (window.scrollY > 40) {
       header.classList.add('scrolled');
@@ -118,7 +107,6 @@ window.addEventListener('scroll', () => {
     }
   }
 
-  // Active navigation link highlighter
   let currentSec = '';
   sections.forEach((sec) => {
     const top = sec.offsetTop - 150;
@@ -151,9 +139,7 @@ drawerLinks.forEach((l) =>
   l.addEventListener('click', () => drawer.classList.remove('open'))
 );
 
-/* ===================================================
-   4. SCROLL REVEAL ANIMATION (INTERSECTION OBSERVER)
-=================================================== */
+/* Scroll Reveal Animation */
 const revealElements = document.querySelectorAll('.reveal-elem');
 const observer = new IntersectionObserver(
   (entries) => {
@@ -165,12 +151,9 @@ const observer = new IntersectionObserver(
   },
   { threshold: 0.12 }
 );
-
 revealElements.forEach((el) => observer.observe(el));
 
-/* ===================================================
-   5. 3D CARD TILT MICRO-INTERACTION
-=================================================== */
+/* 3D Tilt Effect on Cards */
 const cards = document.querySelectorAll('.glass-card');
 cards.forEach((card) => {
   card.addEventListener('mousemove', (e) => {
@@ -181,44 +164,11 @@ cards.forEach((card) => {
   });
 
   card.addEventListener('mouseleave', () => {
-    card.style.transform =
-      'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
   });
 });
 
-/* ===================================================
-   6. RESUME MODAL CONTROLS
-=================================================== */
-const resumeModal = document.getElementById('resumeModal');
-const openResumeBtn = document.getElementById('openResumeModal');
-const closeResumeBtn = document.getElementById('closeResumeModal');
-
-if (openResumeBtn && resumeModal) {
-  openResumeBtn.addEventListener('click', () => {
-    resumeModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  });
-}
-
-if (closeResumeBtn && resumeModal) {
-  closeResumeBtn.addEventListener('click', () => {
-    resumeModal.classList.remove('active');
-    document.body.style.overflow = 'auto';
-  });
-}
-
-if (resumeModal) {
-  resumeModal.addEventListener('click', (e) => {
-    if (e.target === resumeModal) {
-      resumeModal.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-  });
-}
-
-/* ===================================================
-   7. 1-CLICK CLIPBOARD HELPER & TOAST NOTIFICATION
-=================================================== */
+/* Clipboard Helper */
 function copyData(text, msg) {
   navigator.clipboard.writeText(text).then(() => {
     showToast(msg);
