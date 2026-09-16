@@ -7,10 +7,9 @@
   
   <!-- Premium Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- INGA DHAAN CSS LINK PANRANUM -->
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -45,7 +44,7 @@
       </div>
     </header>
 
-    <!-- MOBILE NAVIGATION DRAWER -->
+    <!-- MOBILE DRAWER -->
     <div class="mobile-drawer" id="mobileDrawer">
       <button class="drawer-close" id="closeDrawer" aria-label="Close menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -80,10 +79,11 @@
         </p>
 
         <div class="hero-actions reveal-elem">
-          <button class="btn btn-primary" id="openResumeModal">
+          <!-- Direct PDF Tab Link -->
+          <a href="resume.pdf" target="_blank" class="btn btn-primary">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
             View Resume
-          </button>
+          </a>
           <a href="#contact" class="btn btn-outline">
             Contact Me
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -334,84 +334,11 @@
     </footer>
   </div>
 
-  <!-- RESUME PREVIEW MODAL -->
-  <div class="resume-modal" id="resumeModal">
-    <div class="modal-paper">
-      <button class="modal-close" id="closeResumeModal">✕</button>
-      <div class="modal-actions">
-        <button class="btn btn-primary" onclick="window.print()">Print / Save PDF</button>
-      </div>
-
-      <div class="doc-header">
-        <h2 class="doc-name">DHARSAN. R</h2>
-        <div class="doc-role">B.Com Student</div>
-        <div class="doc-contact-line">dharsan637420@gmail.com | 6374200729</div>
-      </div>
-
-      <div class="doc-sec">
-        <div class="doc-sec-title">Objective</div>
-        <p>"Secure a position in a company where I can utilize my skills to upgrade myself and make a significant contribution towards the success of the company."</p>
-      </div>
-
-      <div class="doc-sec">
-        <div class="doc-sec-title">Educational Qualification</div>
-        <ul>
-          <li><strong>Pursuing B.Com IB (International Business)</strong> – Nallamuthu Gounder Mahalingam College (2024 – 2027)</li>
-          <li><strong>12th Grade</strong> – Municipal Boys Higher Secondary School, Pollachi (2023 – 2024)</li>
-          <li><strong>10th Grade</strong> – Municipal Boys Higher Secondary School, Pollachi (2021 – 2022)</li>
-        </ul>
-      </div>
-
-      <div class="doc-sec">
-        <div class="doc-sec-title">Skill Set</div>
-        <ul>
-          <li>Adaptable and quick learner</li>
-          <li>Good communication skills</li>
-          <li>Analytical skills</li>
-          <li>Interpersonal skills</li>
-          <li>Problem solving</li>
-          <li>Like to interact with people and understand and solve their problems</li>
-        </ul>
-      </div>
-
-      <div class="doc-sec">
-        <div class="doc-sec-title">Internship</div>
-        <p><strong>Company Name & Amazon</strong>: Daily Division (1 to 30 days)</p>
-      </div>
-
-      <div class="doc-sec">
-        <div class="doc-sec-title">Certifications</div>
-        <ul>
-          <li>Strategic Sales Management – NPTEL</li>
-          <li>Digital Productivity</li>
-          <li>Digital Productivity with AI</li>
-        </ul>
-      </div>
-
-      <div class="doc-sec">
-        <div class="doc-sec-title">Computer Proficiency</div>
-        <ul>
-          <li>Microsoft Excel</li>
-          <li>Microsoft Word</li>
-          <li>PowerPoint</li>
-        </ul>
-      </div>
-
-      <div class="doc-sec">
-        <div class="doc-sec-title">Personal Details</div>
-        <p><strong>Date of Birth:</strong> 21-12-2006</p>
-        <p><strong>Languages Known:</strong> English, Tamil & Malayalam</p>
-        <p><strong>Communication Address:</strong> 1/37 Rangasamy Layout, Kumaran Nagar</p>
-      </div>
-    </div>
-  </div>
-
   <!-- TOAST FEEDBACK -->
   <div id="toast">
     <span id="toastMsg">Action completed!</span>
   </div>
 
-  <!-- INGA DHAAN JAVASCRIPT LINK PANRANUM -->
   <script src="script.js"></script>
 </body>
 </html>
