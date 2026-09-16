@@ -5,806 +5,413 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DHARSAN.R | B.Com Student Portfolio</title>
   
-  <!-- Premium Google Fonts -->
+  <!-- Premium Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    /* ===================================================
-       RESET & ROOT VARIABLES
-    =================================================== */
-    :root {
-      --bg-base: #07070b;
-      --bg-surface: #0f1016;
-      --bg-card: rgba(18, 19, 28, 0.7);
-      --bg-card-hover: rgba(26, 28, 42, 0.85);
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-glow: rgba(168, 85, 247, 0.35);
-      
-      --accent-purple: #a855f7;
-      --accent-magenta: #ec4899;
-      --accent-cyan: #06b6d4;
-      --accent-gradient: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
-      
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      
-      --font-display: 'Space Grotesk', sans-serif;
-      --font-body: 'Plus Jakarta Sans', sans-serif;
-      
-      --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      background-color: var(--bg-base);
-      color: var(--text-main);
-      font-family: var(--font-body);
-      overflow-x: hidden;
-    }
-
-    body {
-      position: relative;
-      min-height: 100vh;
-      overflow-x: hidden;
-      background: radial-gradient(circle at 50% 0%, #15102a 0%, #07070b 55%, #050508 100%);
-    }
-
-    ::selection {
-      background: var(--accent-purple);
-      color: #ffffff;
-    }
-
-    /* Scrollbar Styling */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #07070b;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #272738;
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--accent-purple);
-    }
-
-    /* Ambient Cursor Glow */
-    #cursor-glow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 450px;
-      height: 450px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, rgba(236, 72, 153, 0.04) 45%, transparent 70%);
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      z-index: 1;
-      transition: transform 0.12s ease-out, opacity 0.3s ease;
-    }
-
-    /* Particle Canvas */
-    #particle-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.65;
-    }
-
-    /* Content Wrapper */
-    .app-wrapper {
-      position: relative;
-      z-index: 2;
-    }
-
-    /* ===================================================
-       NAVIGATION
-    =================================================== */
-    header.header-nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      transition: all 0.4s var(--transition-smooth);
-      padding: 22px 0;
-    }
-
-    header.header-nav.scrolled {
-      padding: 14px 0;
-      background: rgba(7, 7, 11, 0.82);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border-subtle);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .brand-logo {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: var(--text-main);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .brand-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent-purple);
-      box-shadow: 0 0 12px var(--accent-purple);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-      align-items: center;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      transition: color 0.3s ease, text-shadow 0.3s ease;
-      position: relative;
-      padding: 4px 0;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: var(--accent-gradient);
-      transition: width 0.3s var(--transition-smooth);
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: #ffffff;
-      text-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
-    }
-
-    .nav-links a.active::after,
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .mobile-menu-btn {
-      display: none;
-      background: transparent;
-      border: none;
-      color: var(--text-main);
-      cursor: pointer;
-      padding: 6px;
-    }
-
-    .mobile-menu-btn svg {
-      width: 28px;
-      height: 28px;
-      stroke: currentColor;
-    }
-
-    /* Mobile Drawer */
-    .mobile-drawer {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 80%;
-      max-width: 320px;
-      height: 100vh;
-      background: rgba(11, 12, 18, 0.96);
-      backdrop-filter: blur(25px);
-      z-index: 101;
-      padding: 80px 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      border-left: 1px solid var(--border-subtle);
-      transition: right 0.4s var(--transition-smooth);
-    }
-
-    .mobile-drawer.open {
-      right: 0;
-    }
-
-    .mobile-drawer a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .drawer-close {
-      position: absolute;
-      top: 24px;
-      right: 24px;
-      background: transparent;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-    }
-
-    /* ===================================================
-       HERO SECTION
-    =================================================== */
-    .hero-section {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 140px 24px 80px;
-      text-align: center;
-      position: relative;
-    }
-
-    .hero-inner {
-      max-width: 950px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
-      border-radius: 999px;
-      background: rgba(168, 85, 247, 0.08);
-      border: 1px solid rgba(168, 85, 247, 0.25);
-      color: #d8b4fe;
-      font-size: 0.8rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 28px;
-      box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
-      animation: pulseGlow 4s ease-in-out infinite alternate;
-    }
-
-    .hero-badge-pulse {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #ec4899;
-      box-shadow: 0 0 8px #ec4899;
-      animation: blink 2s infinite;
-    }
-
-    .hero-name {
-      font-family: var(--font-display);
-      font-size: clamp(3.2rem, 9vw, 7.2rem);
-      font-weight: 700;
-      letter-spacing: -1.5px;
-      line-height: 1.05;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      color: #ffffff;
-      text-shadow: 0 0 40px rgba(255, 255, 255, 0.15), 0 0 70px rgba(168, 85, 247, 0.25);
-    }
-
-    .hero-name span {
-      background: linear-gradient(135deg, #ffffff 40%, #c084fc 80%, #f472b6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-title-role {
-      font-family: var(--font-display);
-      font-size: clamp(1.2rem, 3.5vw, 2.2rem);
-      font-weight: 500;
-      color: var(--accent-purple);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 30px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .hero-objective-intro {
-      max-width: 720px;
-      color: var(--text-muted);
-      font-size: clamp(1rem, 1.3vw, 1.18rem);
-      line-height: 1.8;
-      font-weight: 300;
-      margin-bottom: 48px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    /* Buttons */
-    .btn {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 15px 34px;
-      border-radius: 999px;
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.35s var(--transition-smooth);
-      border: 1px solid transparent;
-      outline: none;
-    }
-
-    .btn-primary {
-      background: var(--accent-gradient);
-      color: #ffffff;
-      box-shadow: 0 8px 30px rgba(168, 85, 247, 0.35);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 12px 40px rgba(236, 72, 153, 0.45);
-    }
-
-    .btn-outline {
-      background: rgba(255, 255, 255, 0.03);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-    }
-
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: var(--accent-purple);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(168, 85, 247, 0.2);
-    }
-
-    /* ===================================================
-       KINETIC CONTINUOUS MARQUEE
-    =================================================== */
-    .marquee-container {
-      width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      position: relative;
-      padding: 24px 0;
-      background: rgba(13, 14, 21, 0.5);
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-      user-select: none;
-    }
-
-    .marquee-track {
-      display: inline-flex;
-      white-space: nowrap;
-      animation: marqueeScroll 26s linear infinite;
-    }
-
-    .marquee-track.reverse {
-      animation: marqueeScrollRev 28s linear infinite;
-    }
-
-    .marquee-item {
-      font-family: var(--font-display);
-      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-      font-weight: 600;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.25);
-      padding: 0 28px;
-      display: inline-flex;
-      align-items: center;
-      gap: 28px;
-      transition: color 0.3s;
-    }
-
-    .marquee-item span.accent-star {
-      color: var(--accent-purple);
-      font-size: 1.2rem;
-      text-shadow: 0 0 10px var(--accent-purple);
-    }
-
-    .marquee-container:hover .marquee-track {
-      animation-play-state: paused;
-    }
-
-    /* ===================================================
-       GENERAL SECTION LAYOUT
-    =================================================== */
-    section {
-      padding: 110px 24px;
-      position: relative;
-    }
-
-    .container {
-      max-width: 1180px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      margin-bottom: 60px;
-    }
-
-    .section-tag {
-      font-family: var(--font-display);
-      color: var(--accent-purple);
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.5px;
-      text-transform: uppercase;
-      line-height: 1.15;
-    }
-
-    .section-subtitle {
-      margin-top: 10px;
-      color: var(--text-muted);
-      font-size: 1rem;
-      font-weight: 300;
-      max-width: 600px;
-    }
-
-    /* Glassmorphism Card Style */
-    .glass-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      padding: 34px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.4s var(--transition-smooth), border-color 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .glass-card:hover {
-      border-color: var(--border-glow);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4), 0 0 25px rgba(168, 85, 247, 0.15);
-      background: var(--bg-card-hover);
-    }
-
-    /* Glow corner light on cards */
-    .glass-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.45), rgba(236, 72, 153, 0.45), transparent);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    .glass-card:hover::before {
-      opacity: 1;
-    }
-
-    /* ===================================================
-       ABOUT / OBJECTIVE SECTION
-    =================================================== */
-    .about-card {
-      background: linear-gradient(135deg, rgba(22, 23, 35, 0.8) 0%, rgba(13, 14, 22, 0.7) 100%);
-      border: 1px solid var(--border-subtle);
-      border-radius: 24px;
-      padding: clamp(32px, 5vw, 56px);
-      position: relative;
-    }
-
-    .quote-icon {
-      width: 48px;
-      height: 48px;
-      color: var(--accent-purple);
-      opacity: 0.5;
-      margin-bottom: 24px;
-    }
-
-    .objective-quote {
-      font-family: var(--font-display);
-      font-size: clamp(1.2rem, 2.2vw, 1.85rem);
-      line-height: 1.6;
-      color: #ffffff;
-      font-weight: 500;
-      letter-spacing: -0.2px;
-      margin-bottom: 30px;
-    }
-
-    .about-meta {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .about-avatar {
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      background: var(--accent-gradient);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: #fff;
-      box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
-    }
-
-    .about-meta-text h4 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: #ffffff;
-    }
-
-    .about-meta-text p {
-      color: var(--accent-purple);
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-    }
-
-    /* ===================================================
-       EDUCATION TIMELINE
-    =================================================== */
-    .timeline-wrapper {
-      position: relative;
-      padding-left: 36px;
-    }
-
-    .timeline-wrapper::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 11px;
-      width: 2px;
-      background: linear-gradient(180deg, var(--accent-purple) 0%, rgba(236, 72, 153, 0.4) 70%, transparent 100%);
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 42px;
-    }
-
-    .timeline-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .timeline-node {
-      position: absolute;
-      left: -36px;
-      top: 24px;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: #07070b;
-      border: 2px solid var(--accent-purple);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 14px var(--accent-purple);
-      z-index: 2;
-    }
-
-    .timeline-node::after {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #ffffff;
-    }
-
-    .edu-badge {
-      display: inline-block;
-      padding: 4px 12px;
-      background: rgba(168, 85, 247, 0.12);
-      border: 1px solid rgba(168, 85, 247, 0.3);
-      border-radius: 999px;
-      color: #d8b4fe;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-    }
-
-    .edu-degree {
-      font-family: var(--font-display);
-      font-size: 1.45rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 6px;
-    }
-
-    .edu-institution {
-      color: var(--text-muted);
-      font-size: 1rem;
-      margin-bottom: 6px;
-      font-weight: 500;
-    }
-
-    .edu-affil {
-      color: var(--accent-cyan);
-      font-size: 0.85rem;
-      margin-bottom: 12px;
-      font-weight: 400;
-    }
-
-    .edu-period {
-      color: var(--text-dim);
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* ===================================================
-       SKILLS GRID
-    =================================================== */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .skill-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 170px;
-    }
-
-    .skill-icon-wrap {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      background: rgba(168, 85, 247, 0.12);
-      border: 1px solid rgba(168, 85, 247, 0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #d8b4fe;
-      margin-bottom: 20px;
-      transition: all 0.35s ease;
-    }
-
-    .skill-card:hover .skill-icon-wrap {
-      background: var(--accent-purple);
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 0 18px rgba(168, 85, 247, 0.5);
-    }
-
-    .skill-title {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: #ffffff;
-      line-height: 1.4;
-    }
-
-    /* ===================================================
-       INTERNSHIP SECTION
-    =================================================== */
-    .internship-card {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 34px;
-      align-items: center;
-      padding: clamp(28px, 4vw, 48px);
-      border: 1px solid var(--border-subtle);
-    }
-
-    .internship-icon-box {
-      width: 80px;
-      height: 80px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, rgba(168, 85, 247, 0.18), rgba(236, 72, 153, 0.1));
-      border: 1px solid rgba(168, 85, 247, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #c084fc;
-    }
-
-    .intern-company {
-      font-family: var(--font-display);
-      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 8px;
-    }
-
-    .intern-division {
-      display: inline-block;
-      color: var(--accent-magenta);
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-    }
-
-    .intern-duration-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 999px;
-      border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-
-    /* ===================================================
-       CERTIFICATIONS & COMPUTER PROFICIENCY
-    =================================================== */
-    .certs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-      gap: 24px;
-    }
-
-    .cert-card {
-      display: flex;
-      flex-direction
+  <!-- INGA DHAAN CSS LINK PANRANUM -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Ambient Cursor Glow Effect -->
+  <div id="cursor-glow"></div>
+
+  <!-- Interactive Background Canvas Particles -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="app-wrapper">
+    <!-- NAVIGATION BAR -->
+    <header class="header-nav" id="mainHeader">
+      <div class="nav-container">
+        <a href="#hero" class="brand-logo">
+          DHARSAN.R <span class="brand-dot"></span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#internship">Internship</a></li>
+          <li><a href="#certifications">Certifications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <button class="mobile-menu-btn" id="openDrawer" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <button class="drawer-close" id="closeDrawer" aria-label="Close menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <a href="#hero" class="drawer-link">Home</a>
+      <a href="#about" class="drawer-link">About</a>
+      <a href="#education" class="drawer-link">Education</a>
+      <a href="#skills" class="drawer-link">Skills</a>
+      <a href="#internship" class="drawer-link">Internship</a>
+      <a href="#certifications" class="drawer-link">Certifications</a>
+      <a href="#contact" class="drawer-link">Contact</a>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="hero-inner">
+        <div class="hero-badge reveal-elem">
+          <span class="hero-badge-pulse"></span>
+          <span>B.Com International Business</span>
+        </div>
+
+        <h1 class="hero-name reveal-elem">
+          <span>DHARSAN.R</span>
+        </h1>
+
+        <div class="hero-title-role reveal-elem">
+          B.Com Student
+        </div>
+
+        <p class="hero-objective-intro reveal-elem">
+          "Secure a position in a company where I can utilize my skills to upgrade myself and make a significant contribution towards the success of the company."
+        </p>
+
+        <div class="hero-actions reveal-elem">
+          <button class="btn btn-primary" id="openResumeModal">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            View Resume
+          </button>
+          <a href="#contact" class="btn btn-outline">
+            Contact Me
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOVING TEXT MARQUEE #1 -->
+    <div class="marquee-container" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-item">B.COM <span class="accent-star">✦</span> INTERNATIONAL BUSINESS <span class="accent-star">✦</span> PROFESSIONAL GROWTH <span class="accent-star">✦</span></span>
+        <span class="marquee-item">B.COM <span class="accent-star">✦</span> INTERNATIONAL BUSINESS <span class="accent-star">✦</span> PROFESSIONAL GROWTH <span class="accent-star">✦</span></span>
+        <span class="marquee-item">B.COM <span class="accent-star">✦</span> INTERNATIONAL BUSINESS <span class="accent-star">✦</span> PROFESSIONAL GROWTH <span class="accent-star">✦</span></span>
+        <span class="marquee-item">B.COM <span class="accent-star">✦</span> INTERNATIONAL BUSINESS <span class="accent-star">✦</span> PROFESSIONAL GROWTH <span class="accent-star">✦</span></span>
+      </div>
+    </div>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header reveal-elem">
+          <div class="section-tag">01. Overview</div>
+          <h2 class="section-title">Career Objective</h2>
+          <p class="section-subtitle">Dedicated student focused on continuous learning, adaptation and strategic organizational value.</p>
+        </div>
+
+        <div class="about-card reveal-elem">
+          <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+          <div class="objective-quote">
+            "Secure a position in a company where I can utilize my skills to upgrade myself and make a significant contribution towards the success of the company."
+          </div>
+          <div class="about-meta">
+            <div class="about-avatar">D</div>
+            <div class="about-meta-text">
+              <h4>DHARSAN.R</h4>
+              <p>B.Com Student (2024 – 2027)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section id="education">
+      <div class="container">
+        <div class="section-header reveal-elem">
+          <div class="section-tag">02. Academic Background</div>
+          <h2 class="section-title">Education History</h2>
+          <p class="section-subtitle">A chronological record of verified academic qualifications and coursework.</p>
+        </div>
+
+        <div class="timeline-wrapper">
+          <div class="timeline-item reveal-elem">
+            <div class="timeline-node"></div>
+            <div class="glass-card">
+              <span class="edu-badge">Pursuing</span>
+              <h3 class="edu-degree">B.Com IB (International Business)</h3>
+              <p class="edu-institution">Nallamuthu Gounder Mahalingam College</p>
+              <p class="edu-affil">Affiliated to Bharathiar University, Coimbatore</p>
+              <div class="edu-period">2024 – 2027</div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal-elem">
+            <div class="timeline-node"></div>
+            <div class="glass-card">
+              <span class="edu-badge">Completed</span>
+              <h3 class="edu-degree">12th Grade</h3>
+              <p class="edu-institution">Municipal Boys Higher Secondary School, Pollachi</p>
+              <div class="edu-period">2023 – 2024</div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal-elem">
+            <div class="timeline-node"></div>
+            <div class="glass-card">
+              <span class="edu-badge">Completed</span>
+              <h3 class="edu-degree">10th Grade</h3>
+              <p class="edu-institution">Municipal Boys Higher Secondary School, Pollachi</p>
+              <div class="edu-period">2021 – 2022</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOVING TEXT MARQUEE #2 -->
+    <div class="marquee-container" aria-hidden="true">
+      <div class="marquee-track reverse">
+        <span class="marquee-item">LEARN <span class="accent-star">✦</span> ADAPT <span class="accent-star">✦</span> COMMUNICATE <span class="accent-star">✦</span> SOLVE <span class="accent-star">✦</span> GROW <span class="accent-star">✦</span></span>
+        <span class="marquee-item">LEARN <span class="accent-star">✦</span> ADAPT <span class="accent-star">✦</span> COMMUNICATE <span class="accent-star">✦</span> SOLVE <span class="accent-star">✦</span> GROW <span class="accent-star">✦</span></span>
+        <span class="marquee-item">LEARN <span class="accent-star">✦</span> ADAPT <span class="accent-star">✦</span> COMMUNICATE <span class="accent-star">✦</span> SOLVE <span class="accent-star">✦</span> GROW <span class="accent-star">✦</span></span>
+      </div>
+    </div>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills">
+      <div class="container">
+        <div class="section-header reveal-elem">
+          <div class="section-tag">03. Capabilities</div>
+          <h2 class="section-title">Core Skills</h2>
+          <p class="section-subtitle">Verified interpersonal and analytical attributes.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="glass-card skill-card reveal-elem">
+            <h3 class="skill-title">Adaptable and quick learner</h3>
+          </div>
+          <div class="glass-card skill-card reveal-elem">
+            <h3 class="skill-title">Good communication skills</h3>
+          </div>
+          <div class="glass-card skill-card reveal-elem">
+            <h3 class="skill-title">Analytical skills</h3>
+          </div>
+          <div class="glass-card skill-card reveal-elem">
+            <h3 class="skill-title">Interpersonal skills</h3>
+          </div>
+          <div class="glass-card skill-card reveal-elem">
+            <h3 class="skill-title">Problem solving</h3>
+          </div>
+          <div class="glass-card skill-card reveal-elem">
+            <h3 class="skill-title">Like to interact with people and understand and solve their problems</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERNSHIP SECTION -->
+    <section id="internship">
+      <div class="container">
+        <div class="section-header reveal-elem">
+          <div class="section-tag">04. Experience</div>
+          <h2 class="section-title">Internship</h2>
+        </div>
+
+        <div class="glass-card internship-card reveal-elem">
+          <div>
+            <h3 class="intern-company">Company Name & Amazon</h3>
+            <div class="intern-division">Daily Division</div>
+            <div>
+              <span class="intern-duration-pill">Duration: 1 to 30 days</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS & COMPUTER PROFICIENCY -->
+    <section id="certifications">
+      <div class="container">
+        <div class="section-header reveal-elem">
+          <div class="section-tag">05. Credentials & Tools</div>
+          <h2 class="section-title">Certifications</h2>
+        </div>
+
+        <div class="certs-grid">
+          <div class="glass-card cert-card reveal-elem">
+            <div class="cert-badge">NPTEL</div>
+            <h3 class="cert-name">Strategic Sales Management</h3>
+          </div>
+          <div class="glass-card cert-card reveal-elem">
+            <div class="cert-badge">Digital Skills</div>
+            <h3 class="cert-name">Digital Productivity</h3>
+          </div>
+          <div class="glass-card cert-card reveal-elem">
+            <div class="cert-badge">AI</div>
+            <h3 class="cert-name">Digital Productivity with AI</h3>
+          </div>
+        </div>
+
+        <div style="margin-top: 60px;" class="reveal-elem">
+          <h3 style="font-family: var(--font-display); font-size: 1.8rem; color: #fff; margin-bottom: 24px;">Computer Proficiency</h3>
+          <div class="comp-grid">
+            <div class="glass-card comp-card">
+              <h4 class="comp-title">Microsoft Excel</h4>
+            </div>
+            <div class="glass-card comp-card">
+              <h4 class="comp-title">Microsoft Word</h4>
+            </div>
+            <div class="glass-card comp-card">
+              <h4 class="comp-title">PowerPoint</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERSONAL DETAILS -->
+    <section id="personal">
+      <div class="container">
+        <div class="section-header reveal-elem">
+          <div class="section-tag">06. Profile</div>
+          <h2 class="section-title">Personal Details</h2>
+        </div>
+
+        <div class="personal-grid">
+          <div class="glass-card reveal-elem">
+            <div class="detail-item-title">Date of Birth</div>
+            <div class="detail-item-val">21-12-2006</div>
+          </div>
+          <div class="glass-card reveal-elem">
+            <div class="detail-item-title">Languages Known</div>
+            <div class="detail-item-val">English, Tamil & Malayalam</div>
+          </div>
+          <div class="glass-card reveal-elem">
+            <div class="detail-item-title">Communication Address</div>
+            <div class="detail-item-val">1/37 Rangasamy Layout, Kumaran Nagar</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-header reveal-elem">
+          <div class="section-tag">07. Get In Touch</div>
+          <h2 class="section-title">Contact</h2>
+        </div>
+
+        <div class="contact-container">
+          <div class="glass-card contact-channel reveal-elem">
+            <div>
+              <div class="contact-info-label">Email Address</div>
+              <a href="mailto:dharsan637420@gmail.com" class="contact-info-val">dharsan637420@gmail.com</a>
+            </div>
+            <button class="copy-btn" onclick="copyData('dharsan637420@gmail.com', 'Email copied!')">Copy</button>
+          </div>
+
+          <div class="glass-card contact-channel reveal-elem">
+            <div>
+              <div class="contact-info-label">Phone Number</div>
+              <a href="tel:6374200729" class="contact-info-val">6374200729</a>
+            </div>
+            <button class="copy-btn" onclick="copyData('6374200729', 'Phone number copied!')">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-name">DHARSAN.R</div>
+        <div class="footer-sub">B.Com Student</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- RESUME PREVIEW MODAL -->
+  <div class="resume-modal" id="resumeModal">
+    <div class="modal-paper">
+      <button class="modal-close" id="closeResumeModal">✕</button>
+      <div class="modal-actions">
+        <button class="btn btn-primary" onclick="window.print()">Print / Save PDF</button>
+      </div>
+
+      <div class="doc-header">
+        <h2 class="doc-name">DHARSAN. R</h2>
+        <div class="doc-role">B.Com Student</div>
+        <div class="doc-contact-line">dharsan637420@gmail.com | 6374200729</div>
+      </div>
+
+      <div class="doc-sec">
+        <div class="doc-sec-title">Objective</div>
+        <p>"Secure a position in a company where I can utilize my skills to upgrade myself and make a significant contribution towards the success of the company."</p>
+      </div>
+
+      <div class="doc-sec">
+        <div class="doc-sec-title">Educational Qualification</div>
+        <ul>
+          <li><strong>Pursuing B.Com IB (International Business)</strong> – Nallamuthu Gounder Mahalingam College (2024 – 2027)</li>
+          <li><strong>12th Grade</strong> – Municipal Boys Higher Secondary School, Pollachi (2023 – 2024)</li>
+          <li><strong>10th Grade</strong> – Municipal Boys Higher Secondary School, Pollachi (2021 – 2022)</li>
+        </ul>
+      </div>
+
+      <div class="doc-sec">
+        <div class="doc-sec-title">Skill Set</div>
+        <ul>
+          <li>Adaptable and quick learner</li>
+          <li>Good communication skills</li>
+          <li>Analytical skills</li>
+          <li>Interpersonal skills</li>
+          <li>Problem solving</li>
+          <li>Like to interact with people and understand and solve their problems</li>
+        </ul>
+      </div>
+
+      <div class="doc-sec">
+        <div class="doc-sec-title">Internship</div>
+        <p><strong>Company Name & Amazon</strong>: Daily Division (1 to 30 days)</p>
+      </div>
+
+      <div class="doc-sec">
+        <div class="doc-sec-title">Certifications</div>
+        <ul>
+          <li>Strategic Sales Management – NPTEL</li>
+          <li>Digital Productivity</li>
+          <li>Digital Productivity with AI</li>
+        </ul>
+      </div>
+
+      <div class="doc-sec">
+        <div class="doc-sec-title">Computer Proficiency</div>
+        <ul>
+          <li>Microsoft Excel</li>
+          <li>Microsoft Word</li>
+          <li>PowerPoint</li>
+        </ul>
+      </div>
+
+      <div class="doc-sec">
+        <div class="doc-sec-title">Personal Details</div>
+        <p><strong>Date of Birth:</strong> 21-12-2006</p>
+        <p><strong>Languages Known:</strong> English, Tamil & Malayalam</p>
+        <p><strong>Communication Address:</strong> 1/37 Rangasamy Layout, Kumaran Nagar</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST FEEDBACK -->
+  <div id="toast">
+    <span id="toastMsg">Action completed!</span>
+  </div>
+
+  <!-- INGA DHAAN JAVASCRIPT LINK PANRANUM -->
+  <script src="script.js"></script>
+</body>
+</html>
